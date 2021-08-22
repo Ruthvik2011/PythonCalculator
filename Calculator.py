@@ -1,124 +1,78 @@
 from tkinter import *
+
+
+root = Tk()
+
+root.geometry("550x550")
+
 expression = ""
 
+def setexpression(num):
+    global expression
+    expression = expression + str(num)
+    value.set(expression)
 
-
-def press(num):
-	global expression
-
-	
-	expression = expression + str(num)
-
-	
-	equation.set(expression)
-
-
-def equalpress():
-	
-	try:
-
-		global expression
-		total = str(eval(expression))
-		equation.set(total)
-		expression = ""
-
-	
-	except:
-
-		equation.set(" error ")
-		expression = ""
-
-
+def calculator():
+    try:
+        global expression
+        answer = str(eval(expression))
+        value.set(answer)
+    except:
+        value.set("Enter correct expression")
+        expression = ""
 
 def clear():
-	global expression
-	expression = ""
-	equation.set("")
+    global expression
+    expression = ""
+    value.set(expression)
+
+large_font = ('Verdana', 15)
+small_font = ('Verdana', 10)
+
+value = StringVar(value="Please Enter expression")
 
 
-# Driver code
-if __name__ == "__main__":
-	gui = Tk()
+Entry(root, textvariable=value, font=large_font).grid(row=0,
+    column=0, columnspan=4, ipadx=70)
 
-	gui.configure(background="light blue")
 
-	gui.title("Basic Calculator")
+Button(root, text="+", fg="red", command=lambda:
+    setexpression("+"), height=4,width=8).grid(row=1,column=0,pady=10)
+Button(root, text="-", fg="red", command=lambda:
+    setexpression("-"), height=4, width=8).grid(row=2, column=0, pady=10)
+Button(root, text="X", fg="red", command=lambda:
+    setexpression("*"), height=4, width=8).grid(row=3, column=0,pady=10)
+Button(root, text="/", fg="red", command=lambda:
+    setexpression("/"), height=4, width=8).grid(row=4, column=0,pady=10)
+Button(root, text="1", fg="red", command=lambda:
+    setexpression("1"), height=4, width=8).grid(row=1, column=1,pady=10)
+Button(root, text="2", fg="red", command=lambda:
+    setexpression("2"), height=4, width=8).grid(row=1, column=2,pady=10)
+Button(root, text="3", fg="red", command=lambda:
+    setexpression("3"), height=4, width=8).grid(row=1, column=3,pady=10)
+Button(root, text="4", fg="red", command=lambda:
+    setexpression("4"), height=4, width=8).grid(row=2, column=1,pady=10)
+Button(root, text="5", fg="red", command=lambda:
+    setexpression("5"), height=4, width=8).grid(row=2, column=2)
+Button(root, text="6", fg="red", command=lambda:
+    setexpression("6"), height=4, width=8).grid(row=2, column=3,pady=10)
+Button(root, text="7", fg="red", command=lambda:
+    setexpression("7"), height=4, width=8).grid(row=3, column=1,pady=10)
+Button(root, text="8", fg="red", command=lambda:
+    setexpression("8"), height=4, width=8).grid(row=3, column=2,pady=10)
+Button(root, text="9", fg="red", command=lambda:
+    setexpression("9"), height=4, width=8).grid(row=3, column=3,pady=10)
+Button(root, text="0", fg="red", command=lambda:
+    setexpression("0"), height=4, width=8).grid(row=4, column=2,pady=10)
+Button(root, text=".", fg="red", command=lambda:
+    setexpression("."), height=4, width=8).grid(row=4, column=1,pady=10)
 
-	gui.geometry("1200x1200")
 
-	equation = StringVar()
+Button(root, text="=", fg="red",bg="orange", command=calculator, height=4,
+width=8).grid(row=4, column=3, pady=10)
 
-	
-	expression_field = Entry(gui, textvariable=equation)
 
-	
-	expression_field.grid(columnspan=5000, ipadx=140)
+Button(root, text="Clear", fg="black", bg="blue" , command=clear, height=4,
+    width=20).grid(row=5, column=1, pady=10)
 
-	button1 = Button(gui, text=' 1 ', fg='black', bg='red',
-					command=lambda: press(1), height=2, width=14)
-	button1.grid(row=45, column=20)
-
-	button2 = Button(gui, text=' 2 ', fg='black', bg='red',
-					command=lambda: press(2), height=2, width=14)
-	button2.grid(row=45, column=21)
-
-	button3 = Button(gui, text=' 3 ', fg='black', bg='red',
-					command=lambda: press(3), height=2, width=14)
-	button3.grid(row=45, column=22)
-
-	button4 = Button(gui, text=' 4 ', fg='black', bg='red',
-					command=lambda: press(4), height=2, width=14)
-	button4.grid(row=46, column=20)
-
-	button5 = Button(gui, text=' 5 ', fg='black', bg='red',
-					command=lambda: press(5), height=2, width=14)
-	button5.grid(row=46, column=21)
-
-	button6 = Button(gui, text=' 6 ', fg='black', bg='red',
-					command=lambda: press(6), height=2, width=14)
-	button6.grid(row=46, column=22)
-
-	button7 = Button(gui, text=' 7 ', fg='black', bg='red',
-					command=lambda: press(7), height=2, width=14)
-	button7.grid(row=47, column=20)
-
-	button8 = Button(gui, text=' 8 ', fg='black', bg='red',
-					command=lambda: press(8), height=2, width=14)
-	button8.grid(row=47, column=21)
-
-	button9 = Button(gui, text=' 9 ', fg='black', bg='red',
-					command=lambda: press(9), height=2, width=14)
-	button9.grid(row=47, column=22)
-
-	button0 = Button(gui, text=' 0 ', fg='black', bg='red',
-					command=lambda: press(0), height=2, width=14)
-	button0.grid(row=48, column=20)
-
-	plus = Button(gui, text=' + ', fg='black', bg='red',
-				command=lambda: press("+"), height=2, width=14)
-	plus.grid(row=45, column=23)
-
-	minus = Button(gui, text=' - ', fg='black', bg='red',
-				command=lambda: press("-"), height=2, width=14)
-	minus.grid(row=46, column=23)
-
-	multiply = Button(gui, text=' * ', fg='black', bg='red',
-					command=lambda: press("*"), height=2, width=14)
-	multiply.grid(row=47, column=23)
-
-	divide = Button(gui, text=' / ', fg='black', bg='red',
-					command=lambda: press("/"), height=2, width=14)
-	divide.grid(row=48, column=23)
-
-	equal = Button(gui, text=' = ', fg='black', bg='red',
-				command=equalpress, height=2, width=14)
-	equal.grid(row=48, column=22)
-
-	clear = Button(gui, text='Clear', fg='black', bg='blue',
-				command=clear, height=2, width=14)
-	clear.grid(row=48, column='21')
-
-	Decimal= Button(gui, text='.', fg='black', bg='red',
-					command=lambda: press('.'), height=2, width=14)
-	Decimal.grid(row=49, column=20)
-	gui.mainloop()
+root.mainloop()
